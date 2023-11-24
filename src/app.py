@@ -11,6 +11,7 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS #mod
 
 # from models import Person
 
@@ -31,6 +32,7 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
+CORS(app) #modification
  
 #Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = os.getenv("FLASK_APP_KEY")  # Change this "super secret" with something else!
