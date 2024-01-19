@@ -25,10 +25,10 @@ def register_user():
     user_password = data.get("password")
     user_gender = data.get("gender")
     user_rol = data.get("rol")
-    user_active = data.get("is_active")
+    #user_active = data.get("is_active")
 
-    if user_email is None or user_username is None or user_password is None or user_gender is None or user_rol is None or user_active is None:
-        return jsonify({"msg":"missing data"}), 400
+    if user_email is None or user_username is None or user_password is None or user_gender is None or user_rol is None: #or user_active is None:
+        return jsonify({"msg":"missing data"})
 
     check_email = User.query.filter_by(email=user_email).first()
 
@@ -36,7 +36,7 @@ def register_user():
         return jsonify({"msg":"User already exists"}), 400
 
     user_password = generate_password_hash(user_password)
-    new_user = User(email=user_email, username=user_username, password=user_password, gender=user_gender, rol=user_rol, is_active=user_active)
+    new_user = User(email=user_email, username=user_username, password=user_password, gender=user_gender, rol=user_rol)
 
     try:
         db.session.add(new_user)

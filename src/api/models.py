@@ -19,7 +19,7 @@ class User(db.Model):
     password = db.Column(db.String(200), unique=False, nullable=False)
     gender = db.Column(db.Enum(UserGender), unique=False, nullable=False) #Only we want to take male, female or other
     rol = db.Column(db.Enum(UserRol),unique=False,nullable=False, default="general")
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False,default=True) #Add default true...
 
     def __repr__(self):
         return f'<User {self.email}>'

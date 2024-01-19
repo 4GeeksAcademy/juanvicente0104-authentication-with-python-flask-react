@@ -74,22 +74,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			// Define a function inside the actions to consult the API and signup a new member
-			signup: async (data) =>{
+			signup: async (data) => {
 				let store = getStore()
-				try{
-					let response = await fetch(`${process.env.BACKEND_URL}/signup`,{
+				try {
+					let response = await fetch(`${process.env.BACKEND_URL}/signup`, {
 						method: "POST",
-						headers:{
-							"Content-type": "application/json"
+						headers: {
+							"Content-Type": "application/json"
 						},
 						body: JSON.stringify(data)
 					})
+					console.log(response.status)
 					return response.status
 
 				} catch (error) {
 					console.log(error)
 				}
 
+			},
+			logout: () => {
+				setStore({
+					token: null
+				})
+				localStorage.removeItem("token")
 			}
 		}
 	};

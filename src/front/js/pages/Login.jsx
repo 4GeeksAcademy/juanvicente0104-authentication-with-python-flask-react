@@ -1,9 +1,13 @@
 import React, { useState, useContext } from "react"
 import { Context } from "../store/appContext"
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
 
     const { actions } = useContext(Context)
+
+    const navigate = useNavigate()
 
     //Define our user state as an JS object that can change with the input
     const [user, setUser] = useState({
@@ -28,7 +32,9 @@ const Login = () => {
         console.log(result)
         if (result == 400) {
             alert("Bad credentials")
+            return
         }
+        navigate("/private")
     }
 
     return (
